@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{hyperref}
+
+\title{VIX Summary}
+\author{Varun Varanasi}
+\date{February 26th, 2022}
+
+\begin{document}
+\maketitle
+
+
+\section*{Key Takeaways}
+\begin{itemize}
+    \item VIX index is a measure of market volatility based on S\&P 500 index option bid/ask prices
+    \item VIX cannot be traded, but its derivatives can (i.e VXX)
+    \item VIX index calculates volatility of the S\&P 500 30 days out, but there exist a family of VIX indicies which calculate volatility for different time periods
+    \item VIX is a function of near term options, next-term options, and risk free treasury bill interest rates
+    \item VIX index is calculated and updated at 15 second intervals by a deterministic formula and selection algorithim
+    \item VIX tends to be inversely correlated with S\&P 500
+    \item There is free historic data of VIX, VIX derivatives, and VIX family indicies that is updated daily; however, that data is generally limited to EOD levels.
+    \item CBOE sells VIX data at 15 second intervals by the month for 10 dollars per dataset 
+\end{itemize}
+
+\section*{General Notes}
+\begin{itemize}
+    \item Operated by the Chicago Board Options Exchange, the VIX index is an up-to-the-minute measure of market volatility based on the midpoints of S\&P 500 index option bid/ask quotes
+    \item The current VIX index measures the expected annualized change in the S\&P 500 index in the next 30 days as calculated by options pricings
+    \item Essentially, the VIX is a measure of the markets prediction of S\&P 500 volatility 30 days in the future
+    \item \textbf{VIX cannot be traded}; instead, it is traded through derivative contracts like futures, ETFs, and options
+    \item Related CBOE Products:
+    \begin{itemize}
+        \item VIX9DSM (Short Term Volatility Index)
+        \item VIX3MSM (3 Month Volatility Index)
+        \item VIX6MSM (6 Month Volatility Index)
+        \item VIX1YSM (1 Year Volatility Index)
+        \item VXNSM (NASDAQ-100 Volatility Index)
+        \item VXDSM (DOW Volatility Index)
+        \item RVXSM (Russell 2000 Volatility Index)
+        \item VVIX (VIX on VIX)
+    \end{itemize}
+    \item VIX is a function of S\&P 500 index options for near term options (less than 23 days till expiry), next-term options (less than 37 days till expiry), and risk free U.S. Treasury Bill interest rates
+    \item The VIX is the volatility of variance swap
+    \subsection*{Quick Interlude into Variance Swaps}
+    \begin{itemize}
+    \item Variance Swap is a derivative contract dependent on the changes in the underlying asset's price (volatility)
+    \item Essentially, one party agrees to pay the implied variance (strike) to the other party who will then pay back the actual variance at the end of the contract
+    \item Profits are realized when the actual variance is greater than the implied variance (calculated from options contracts)
+    \item Variance swaps function similarly to options contracts; however, since option contracts are dependent on directionality, time, expiration, and implied volatility, variance swap contracts tend to be less risky
+    \item Actual variance is calculated from daily log returns (natural log of the difference between given day and previous day price)
+    \end{itemize}
+    \item The VIX index is calculated as the square root of a risk-neutral expectation of the S\&P 500 variance over 30 days and is quoted as an annualized standard deviation
+    \item VIX is calculated by a weighted portfolio of out-of-the-money European-style options of the S\&P 500
+    \begin{itemize}
+        \item Unlike their American counterparts, European options can only be exercised on the expiration date rather than at anytime before it
+        \item Most index options are European-style options
+        \item Black-Scholes Equation models European-style options
+    \end{itemize} 
+    \item VIX Formula:
+    \begin{equation}
+        VIX= 100 *\sqrt{\frac{2e^{r\tau}}{\tau}\left(\int_0^F \frac{P(K)}{K^2}dK + \int_0^\infty \frac{C(K)}{K^2}dK\right)}
+    \end{equation}
+    \begin{itemize}
+        \item $\tau$ is the average days in a month (30)
+        \item r is the risk-free rate (Calculated by subtracting inflation rate from the yield of a US treasury bond matching investment duration)
+        \item F is the 30 day forward price on the S\&P 500
+        \item P(K) is the price for a put of with strike price K 30 days from expiration
+        \item C(K) is similarly the price for a call with a strike price of K 30 days from expiry
+        \item More details on how the individual variables are calculated can be found in the whitepaper: \url{https://cdn.cboe.com/api/global/us_indices/governance/VIX_Methodology.pdf}
+    \end{itemize}
+    \item VIX is only calculated based on options expiring on Fridays
+    \item Intraday VIX index values are calculated based on the bid/ask quotes of SPX options at 15 second intervals
+    \item In order to filter extraneous movement in option pricing, the VIX index is filtered before being updated
+    \begin{itemize}
+        \item An initial baseline VIX index value is calculated
+        \item The baseline is updated if the VIX index moves by more than 0.49 in each direction within 2 minutes of the original baseline calculation
+        \item If there is no change after the 2 minute period, the VIX index is updated to the first value calculated after the 2 minute interval
+    \end{itemize} 
+    \item Generally, the VIX index is inversely correlated with S\&P 500 Index
+    \item The VIX Index tends to be used for risk management or hedging and usually tends towards its historical average
+    \item VIX Futures contracts 
+    \begin{itemize}
+        \item VXX: Long position in 1st and 2nd month VIX futures that roll daily
+        \begin{itemize}
+            \item Negative Roll Yield (long-term holders face penalties on returns)
+            \item Stronger in short-term than long-term
+        \end{itemize}
+        \item VXZ: Long position in fourth-, fifth-, sixth-, and seventh- month VIX futures
+        \begin{itemize}
+            \item Negative Roll Yield (long-term holders face penalties on returns)
+            \item Stronger in short-term than long-term
+        \end{itemize}
+    \end{itemize}
+    \item Criticism against the efficacy of the VIX index
+    \begin{itemize}
+        \item Some critics say that the VIX is just a meausre of current pricing of index options
+        \item Similar to simpiler volatility metrics (past volatility)
+        \item Lacks predictive power and simply just the inverse of pricing
+    \end{itemize}
+
+\end{itemize}
+
+    
+\section*{Datasets}
+\begin{itemize}
+    \item VIX Index Values by 15 seconds: \url{https://datashop.cboe.com/volatility-index-spot-values}
+    \begin{itemize}
+        \item Costs 10 dollars per month
+    \end{itemize}
+    \item VIX Future Trades: \url{https://datashop.cboe.com/cfe-vix-volatility-index-futures-trades-quotes}
+    \begin{itemize}
+        \item Costs 50 dollars per month
+    \end{itemize}
+    \item VIX Index Values: \url{https://www.cboe.com/tradable_products/vix/vix_historical_data/}
+    \begin{itemize}
+        \item Free and updated daily
+        \item Only Open, High, Low, and Close data
+        \item Also available through Yahoo Finance: \url{https://finance.yahoo.com/quote/%5EVIX/history?p=%5EVIX}
+    \end{itemize}
+    \item VIX of VIX Index: \url{https://www.cboe.com/tradable_products/vix/vix_historical_data/}
+    \begin{itemize}
+        \item Free and updated daily
+        \item Only EOD
+    \end{itemize}
+    \item 9-day VIX Index: \url{https://www.cboe.com/tradable_products/vix/vix_historical_data/}
+    \begin{itemize}
+        \item Free and updated daily
+        \item Only Open, High, Low, and Close data
+    \end{itemize}
+    \item VX Futures: \url{https://www.cboe.com/us/futures/market_statistics/historical_data/}
+    \begin{itemize}
+        \item Free and contains futures contract data
+    \end{itemize}
+    \item VIX Options: \url{https://www.cboe.com/us/options/market_statistics/historical_data/}
+    \item VXX: \url{https://finance.yahoo.com/quote/VXX/history?p=VXX}
+    \begin{itemize}
+        \item Daily historical data
+    \end{itemize}
+    
+\end{itemize}
+
+
+
+
+\end{document}

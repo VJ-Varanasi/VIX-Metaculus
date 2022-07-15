@@ -1,0 +1,114 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{hyperref}
+\usepackage{amsfonts}
+
+\title{Timeseries README} 
+\author{Varun Varanasi}
+
+\begin{document}
+
+\maketitle
+
+The goal of this document is to summarize the datatypes and functionality of the TimeSeriesPlot.py script. 
+This script assumes that it is in the same working directory as the Data folder which includes specially named files required for the functions to work.
+Data in the data folder is updated according to the the DownloadCSV.py script which is run hourly by a cronjob. 
+
+\section*{Functions}
+
+\subsection*{ts\_plot}
+This function creates a timeseries plot given a finanical index, a start date, and variables to plot. \\
+\textbf{Inputs:}
+\begin{itemize}
+    \item \textbf{data\_name}: Name of finanicial index you would like to plot (see Available Datasets) 
+    \item \textbf{start\_date}: Start date of the timeseries (syntax note:  YYYY-MM-DD format)
+    \item \textbf{variables}: Select which variables from the dataset you would like to plot (syntax note: put all variables in a list)
+    \item \textbf{fill}: Select 1 to create a fill plot (timeseries value duplicated over x-axis and filled in to better visualize change)
+\end{itemize}
+\textbf{Outputs:} A series of python plots detailing the timeseries at the specified conditions and variables
+\\
+
+\subsection*{ts\_decomp}
+This function decomposes a given financial index into its trend, seasonal, and noise components by both multiplicative and additive methods. \\
+\textbf{Inputs:}
+\begin{itemize}
+    \item \textbf{data\_name}: Name of finanicial index you would like to plot (see Available Datasets) 
+    \item \textbf{start\_date}: Start date of the timeseries (syntax note:  YYYY-MM-DD format)
+    \item \textbf{variables}: Select which variables from the dataset you would like to plot (syntax note: put all variables in a list)
+    \item \textbf{period}: Determines what the period of the timeseries analysis is
+\end{itemize}
+\textbf{Outputs:} A series of python plots detailing the timeseries decomposition at the specified conditions and variables.
+\\
+
+\subsection*{ADH\_test}
+The ADH Test is a test of stationarity of a timeseries. This function runs the ADH test on given financial index, start date, and variables. 
+Generally, the rejection criteria is at a p-value less than 0.05\\
+\begin{itemize}
+    \item \textbf{data\_name}: Name of finanicial index you would like to plot (see Available Datasets) 
+    \item \textbf{start\_date}: Start date of the timeseries (syntax note:  YYYY-MM-DD format)
+    \item \textbf{variables}: Select which variables from the dataset you would like to plot (syntax note: put all variables in a list)
+\end{itemize}
+\textbf{Outputs:} Variable name, ADF statistic, associated p-value and critical values. 
+
+\subsection*{seasonality\_test}
+The seasonality\_test function creates a plot detailing the seasonality of the timeseries given. Expected output will highlight peaks at regular intervals corresponding with the seasonality of the data. 
+\begin{itemize}
+    \item \textbf{data\_name}: Name of finanicial index you would like to plot (see Available Datasets) 
+    \item \textbf{start\_date}: Start date of the timeseries (syntax note:  YYYY-MM-DD format)
+    \item \textbf{variables}: Select which variables from the dataset you would like to plot (syntax note: put all variables in a list)
+\end{itemize}
+\textbf{Outputs:} Python plot showing an autocorrelation plot for the given timeseries. 
+
+
+\subsection*{interpolate\_data}
+This function adds granularity at a specified interval to the provided timeseries.  
+
+\begin{itemize}
+    \item \textbf{data\_name}: Name of finanicial index you would like to plot (see Available Datasets) 
+    \item \textbf{start\_date}: Start date of the timeseries (syntax note:  YYYY-MM-DD format)
+    \item \textbf{variables}: Select which variables from the dataset you would like to plot (syntax note: put all variables in a list)
+    \item \textbf{intervals}: Select which interval of granularity you would like to interpolate (30S: 30 second intervals, 1H: 1 hour intervals, etc.)
+    \item \textbf{methods}: Select between a "Linear" or a "Seasonal" interpolation (seasonal interpolation is a linear interpolation with random noise corresponding to seasonal variation of the timeseries)
+    \item \textbf{period}: Select the period for the timeseries seasonality analysis
+    \item \textbf{csv}: Select 1 to save a .csv file of your interpolated data in the "Data" folder
+\end{itemize}
+\textbf{Outputs:} Saves .csv of interpolated data in "Data" folder and produces a plot of the interpolated timeseries
+
+
+\section*{Available Datasets}
+
+\subsection*{VIX}
+\begin{itemize}
+    \item VIX is a measure of S\&P 500 volatility 30 days from the date in question
+    \item The VIX dataset updated daily and labeled as \textbf{VIX\_History\_DATE\_OF\_UPDATE.csv} in the Data folder
+    \item The dataset contains \textbf{date, OPEN, HIGH, LOW, CLOSE} for each day
+\end{itemize}
+
+\subsection*{VIX9D}
+\begin{itemize}
+    \item VIX9D is a measure of S\&P 500 volatility 9 days from the date in question
+    \item The VIX9D dataset updated daily and labeled as \textbf{VIX9D\_History\_DATE\_OF\_UPDATE.csv} in the Data folder
+    \item The dataset contains \textbf{date, OPEN, HIGH, LOW, CLOSE} for each day
+\end{itemize}
+
+\subsection*{VVIX}
+\begin{itemize}
+    \item VVIX is a VIX index on the VIX itself
+    \item The VVIX dataset is updated daily and labeled as \textbf{VVIX\_History\_DATE\_OF\_UPDATE.csv} in the Data folder
+    \item The data set contains \textbf{date, VVIX}
+\end{itemize}
+
+\subsection*{VXX}
+\begin{itemize}
+    \item VXX is a short-term future derivative of the VIX
+    \item The VXX dataset is updated daily and labeled as \textbf{VXX\_History\_DATE\_OF\_UPDATE.csv} in the Data folder
+    \item The data set contains \textbf{Date, Open, High, Low, Close, Adj Close, Volume}
+\end{itemize}
+
+\subsection*{VIX Futures}
+As of now this data set has not been implemented into the TimeSeriesPlot.py script. 
+
+
+
+
+\end{document}
