@@ -232,7 +232,7 @@ if __name__ == '__main__':
     sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
 
     #Print Results
-    for line in sort_by_sharpe[:5]:
+    for line in sort_by_sharpe[:10]:
         print(line)
 
 
