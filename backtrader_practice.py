@@ -188,7 +188,7 @@ cerebro = bt.Cerebro(optreturn= False)
 
 #Define Start and End Dates
 start = datetime.datetime(2019, 1, 1)
-end = datetime.datetime(2020, 1, 1)
+end = datetime.datetime(2022, 1, 1)
 
 
 #Get File Name
@@ -229,7 +229,7 @@ if __name__ == '__main__':
             final_results_list.append([strategy.params.pfast, strategy.params.pslow, PnL, sharpe['sharperatio']])
 
     #Sort Results
-    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[3], reverse=True)
+    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
 
     #Print Results
     for line in sort_by_sharpe[:5]:

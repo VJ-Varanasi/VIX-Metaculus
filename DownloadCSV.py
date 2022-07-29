@@ -61,7 +61,6 @@ def get_yf (url, data_name):
 
 query_date = get_querydate() 
 vxx_url = f'https://query1.finance.yahoo.com/v7/finance/download/VXX?period1=1516924800&period2={query_date}&interval=1d&events=history&includeAdjustedClose=true'
-
 get_yf(vxx_url, "VXX_History")
 
 
@@ -69,4 +68,3 @@ updateData("https://cdn.cboe.com/api/global/us_indices/daily_prices/VVIX_History
 updateData("https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv","VIX_History")
 updateData("https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX9D_History.csv", "VIX9D_History")
 updateData("https://www.cboe.com/us/futures/market_statistics/historical_data/cfevoloi.csv", "VIX_Futures_Interest")
-
