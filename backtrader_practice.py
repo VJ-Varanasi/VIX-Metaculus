@@ -7,6 +7,7 @@ import yfinance as yf
 import matplotlib.dates
 import glob
 
+#Reference: https://algotrading101.com/learn/backtrader-for-backtesting/#:~:text=If%20you%20want%20to%20backtest,stored%20on%20your%20local%20computer.
 
 #import collections
 
@@ -65,7 +66,7 @@ class PrintClose(bt.Strategy):
 #With Logs
 class MAcrossover(bt.Strategy):
     #moving average parameters
-    params = (("pfast", 20), ("pslow", 50),)
+    params = (("pfast", 18), ("pslow", 52),)
     
     def log (self, txt, dt = None):
         dt = dt or self.datas[0].datetime.date(0)
@@ -185,9 +186,8 @@ class MAcrossover_opt(bt.Strategy):
 #Add Optimization Param
 cerebro = bt.Cerebro(optreturn= False)
 
-
 #Define Start and End Dates
-start = datetime.datetime(2019, 1, 1)
+start = datetime.datetime(2020, 1, 1)
 end = datetime.datetime(2022, 1, 1)
 
 
@@ -200,12 +200,14 @@ feed = MyHLOC(dataname = filename, fromdate = start, todate = end)
 cerebro.adddata(feed)
 
 #Add strategey
-#cerebro.addstrategy(MyStrategy)
-cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name = 'sharpe_ratio')
-cerebro.optstrategy(MAcrossover_opt, pfast =range(5,20), pslow = range (50,100))
+cerebro.addstrategy(MAcrossover)
+#cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name = 'sharpe_ratio')
+#cerebro.optstrategy(MAcrossover_opt, pfast =range(5,20), pslow = range (50,100))
 
 #Add sizer (portion of portfolio traded)
 #cerebro.addsizer(bt.sizers.PercentSizer, percents = 50)
+
+#To add an indicator, simply code up a new class and add it to the next funciton
 
 # Add Analyzer
 #cerebro.addanalyzer(bt.analyzers.AnnualReturn, _name="areturn")
@@ -216,36 +218,38 @@ cerebro.addsizer(bt.sizers.SizerFix, stake=3)
 #Initial Val
 start_portfolio_value = cerebro.broker.getvalue()
 
-#Run
-if __name__ == '__main__':
-    optimized_runs = cerebro.run()
 
-    #Pull Results
-    final_results_list = []
-    for run in optimized_runs:
-        for strategy in run:
-            PnL = round(strategy.broker.get_value() - 10000,2)
-            sharpe = strategy.analyzers.sharpe_ratio.get_analysis()
-            final_results_list.append([strategy.params.pfast, strategy.params.pslow, PnL, sharpe['sharperatio']])
+#Run Optimixation
+# if __name__ == '__main__':
+#     optimized_runs = cerebro.run()
 
-    #Sort Results
-    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
+#     #Pull Results
+#     final_results_list = []
+#     for run in optimized_runs:
+#         for strategy in run:
+#             PnL = round(strategy.broker.get_value() - 10000,2)
+#             sharpe = strategy.analyzers.sharpe_ratio.get_analysis()
+#             final_results_list.append([strategy.params.pfast, strategy.params.pslow, PnL, sharpe['sharperatio']])
 
-    #Print Results
-    for line in sort_by_sharpe[:10]:
-        print(line)
+#     #Sort Results
+#     sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
 
+#     #Print Results
+#     for line in sort_by_sharpe[:5]:
+#         print(line)
 
+#Run Normal Cerebro
+cerebro.run()
 
-#Final Val
-#end_portfolio_value = cerebro.broker.getvalue()
-#pnl = end_portfolio_value - start_portfolio_value
-#print(f'Starting Portfolio Value: {start_portfolio_value:2f}')
-#print(f'Final Portfolio Value: {end_portfolio_value:2f}')
-#print(f'PnL: {pnl:.2f}')
+#Final Log
+end_portfolio_value = cerebro.broker.getvalue()
+pnl = end_portfolio_value - start_portfolio_value
+print(f'Starting Portfolio Value: {start_portfolio_value:2f}')
+print(f'Final Portfolio Value: {end_portfolio_value:2f}')
+print(f'PnL: {pnl:.2f}')
 
 
 #Plot
-#cerebro.plot()
+#cerebro.plot(stdstats=False)
 
 #print(teststrat[0].analyzers.areturn.get_analysis())
