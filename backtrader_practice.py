@@ -100,6 +100,7 @@ class MAcrossover(bt.Strategy):
         self.order = None
     
     def next(self):
+        print(cerebro.broker.getvalue())
         #check for open orders (limit to one trade at a time)
         if self.order:
             return
@@ -187,8 +188,8 @@ class MAcrossover_opt(bt.Strategy):
 cerebro = bt.Cerebro(optreturn= False)
 
 #Define Start and End Dates
-start = datetime.datetime(2020, 1, 1)
-end = datetime.datetime(2022, 1, 1)
+start = datetime.datetime(2021, 1, 1)
+end = datetime.datetime(2022, 4, 1)
 
 
 #Get File Name

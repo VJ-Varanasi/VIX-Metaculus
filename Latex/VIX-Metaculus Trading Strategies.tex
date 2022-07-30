@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage[margin=0.75in]{geometry}
+\usepackage{booktabs}
+\usepackage{caption}
+
+\title{Trading Strategies Summary}
+\author{Varun Varanasi}
+
+\begin{document}
+\maketitle
+
+The goal of this document is to outline different trading strategies implemented with the Metaculus data on the VIX, SPY, and their derivatives.
+
+\section*{Metaculus Momentum}
+This simple strategy involves opening a position when the Metaculus series increases and closing the position when it decreases. This strategy only allows for one open position at a time.
+
+\begin{table}[h]
+\centering
+
+\begin{tabular}{l||ccc}
+    \toprule
+     & \textbf{VXX} & \textbf{SPY} & \\
+    \midrule
+    Number of Trades & 165  & 165\\
+    PnL & \$38.10 & 86.85 \\
+    Sharpe Ratio & -2.06 & -4.89\\
+    \bottomrule
+\end{tabular}
+\caption{Summary of results from 1/1/2020 to 4/1/2022}
+\end{table}
+
+\end{document}
