@@ -50,15 +50,36 @@ class VXX_Strat(bt.Strategy):
         if not self.position:
             if self.meta[-1] < self.meta[0]:
                 self.log(f'BUY CREATE {self.vxx[0]:2f}, Metaculus: {self.meta[0]},{self.meta[-1]} ')
-                self.buy()
+                self.buy(data=self.data0)
         elif self.meta[-1] > self.meta[0]:
             self.log(f'CLOSE CREATE {self.vxx[0]:2f}, Metaculus: {self.meta[0]},{self.meta[-1]}')
-            self.close()
+            self.close(data=self.data0)
 
     def log (self, txt, dt = None):
         dt = dt or self.datas[0].datetime.date(0)
         print('%s, %s' % (dt.isoformat(), txt))
 
+class SPY_Strat(bt.Strategy):
+    # Always define parameters first
+    def __init__(self):
+
+        self.vxx = self.data0.close
+        self.meta=self.data1.close
+        self.spy = self.data2.close
+
+    # Trading logic second
+    def next(self):
+        if not self.position:
+            if self.meta[-1] < self.meta[0]:
+                self.log(f'BUY CREATE {self.spy[0]:2f}, Metaculus: {self.meta[0]},{self.meta[-1]} ')
+                self.buy(data=self.data2)
+        elif self.meta[-1] > self.meta[0]:
+            self.log(f'CLOSE CREATE {self.spy[0]:2f}, Metaculus: {self.meta[0]},{self.meta[-1]}')
+            self.close(data=self.data2)
+
+    def log (self, txt, dt = None):
+        dt = dt or self.datas[0].datetime.date(0)
+        print('%s, %s' % (dt.isoformat(), txt))
 
 
 
@@ -88,15 +109,17 @@ metaculus_filename = glob.glob(metaculus_partial_name)[0]
 feed1 = YF_DATA(dataname = vxx_filename, fromdate = start, todate = end)
 feed2 = METACULUS_DATA(dataname = metaculus_filename, fromdate = start, todate = end)
 feed3 = YF_DATA(dataname = spy_filename, fromdate = start, todate = end)
-cerebro.adddata(feed1)
-cerebro.adddata(feed2)
-cerebro.adddata(feed3)
+cerebro.adddata(feed1, name = 'vxx')
+cerebro.adddata(feed2,name = 'meta')
+cerebro.adddata(feed3, name = 'spy')
 
 
 
 #Add Strat
-cerebro.addstrategy(VXX_Strat)
+cerebro.addstrategy(SPY_Strat)
 
+#Add Sharpe Ratio
+cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name = 'sharpe_ratio')
 
 #Default position size
 cerebro.addsizer(bt.sizers.SizerFix, stake=3)
@@ -104,13 +127,15 @@ cerebro.addsizer(bt.sizers.SizerFix, stake=3)
 #Initial Val
 start_portfolio_value = cerebro.broker.getvalue()
 
-cerebro.run(stdstats=False)
+run = cerebro.run(stdstats=False)
 
 #cerebro.plot()
 
 #Final Log
 end_portfolio_value = cerebro.broker.getvalue()
 pnl = end_portfolio_value - start_portfolio_value
+sharpe = run[0].analyzers.sharpe_ratio.get_analysis()['sharperatio']
 print(f'Starting Portfolio Value: {start_portfolio_value:2f}')
 print(f'Final Portfolio Value: {end_portfolio_value:2f}')
 print(f'PnL: {pnl:.2f}')
+print(f'Sharpe Ratio: {sharpe}')
