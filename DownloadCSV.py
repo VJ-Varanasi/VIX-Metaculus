@@ -63,6 +63,8 @@ query_date = get_querydate()
 vxx_url = f'https://query1.finance.yahoo.com/v7/finance/download/VXX?period1=1516924800&period2={query_date}&interval=1d&events=history&includeAdjustedClose=true'
 get_yf(vxx_url, "VXX_History")
 
+spy_url = f'https://query1.finance.yahoo.com/v7/finance/download/SPY?period1=728265600&period2={query_date}&interval=1d&events=history&includeAdjustedClose=true'
+get_yf(spy_url, "SPY_History")
 
 updateData("https://cdn.cboe.com/api/global/us_indices/daily_prices/VVIX_History.csv","VVIX_History")
 updateData("https://cdn.cboe.com/api/global/us_indices/daily_prices/VIX_History.csv","VIX_History")
