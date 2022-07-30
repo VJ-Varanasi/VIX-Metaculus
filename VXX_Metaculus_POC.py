@@ -26,7 +26,7 @@ class VXX_DATA(bt.feeds.GenericCSVData):
 class METACULUS_DATA(bt.feeds.GenericCSVData):
     params =  (
         ("nullvalue", 0.0),
-        ("dtformat", ('%m/%d/%Y')),
+        ("dtformat", ('%Y-%m-%d')),
          ("datetime", 0),
         ("time", -1),
         ("high", -1),
@@ -42,30 +42,32 @@ cerebro = bt.Cerebro(optreturn= False)
 
 #Define Start and End Dates
 start = datetime.datetime(2020, 1, 1)
-end = datetime.datetime(2022, 1, 1)
+end = datetime.datetime(2022, 4, 1)
 
 #Get File Name
 partial_name = f'Data/VXX_History*'
 filename = glob.glob(partial_name)[0]
 
 #Metaculus filename
-metaculus_filename = 'Data/visitors-actives.csv'
+#Controls which smoothness level to use
+smooth_level = 2
 
+metaculus_partial_name = "Data/{}_Day_Smooth_Metaculus_Users_*".format(smooth_level)
+metaculus_filename = glob.glob(metaculus_partial_name)[0]
 
-yeet = pd.read_csv(metaculus_filename)
-print(yeet.head())
-print(yeet.info())
-yeet['Day Index'] = pd.to_datetime(yeet['Day Index'], format = '%m/%d/%y')
-print(yeet.head())
-print(yeet.info())
 
 #Add data to cerebro
 feed1 = VXX_DATA(dataname = filename, fromdate = start, todate = end)
 feed2 = METACULUS_DATA(dataname = metaculus_filename, fromdate = start, todate = end)
 cerebro.adddata(feed1)
-#cerebro.adddata(feed2)
+
+feed2.compensate(feed1)
+feed2.plotinfo.plotmaster = feed1
+#feed2.plotinfo.sameaxis = True
+cerebro.adddata(feed2)
 
 
-cerebro.run()
 
-cerebro.plot(stdstats=False)
+cerebro.run(stdstats=False)
+
+cerebro.plot()
