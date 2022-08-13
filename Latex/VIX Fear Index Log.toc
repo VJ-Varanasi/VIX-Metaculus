@@ -7,3 +7,4 @@
 \contentsline {section}{\numberline {7}June 17th, 2022}{3}{}%
 \contentsline {section}{\numberline {8}July 29th, 2022}{3}{}%
 \contentsline {section}{\numberline {9}August 1st, 2022}{3}{}%
+\contentsline {section}{\numberline {10}August 12th, 2022}{3}{}%
