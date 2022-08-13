@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1660351673 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX-Metaculus Trading Strategies.tex" "VIX-Metaculus Trading Strategies.pdf" "VIX-Metaculus Trading Strategies" 1660351674
-  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX-Metaculus Trading Strategies.tex" 1660351672 2142 09e05615164cbd7e7b137d9a1b475590 ""
+["pdflatex"] 1659379990 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" "VIX Fear Index Log.pdf" "VIX Fear Index Log" 1659379991
+  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" 1659379990 3419 1bd68b0443028d536b8c80bfa4797b3c ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -26,9 +26,6 @@
   "/usr/local/texlive/2022/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/article.cls" 1636758526 20144 8a7de377ae7a11ee924a7499611f5a9d ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/base/size10.clo" 1636758526 8448 96f18c76bf608a36ee6fbf021ac1dd32 ""
-  "/usr/local/texlive/2022/texmf-dist/tex/latex/booktabs/booktabs.sty" 1579038678 6078 f1cb470c9199e7110a27851508ed7a5c ""
-  "/usr/local/texlive/2022/texmf-dist/tex/latex/caption/caption.sty" 1647548653 54291 b8e5c600d4aa37b48a740dd2a6c26163 ""
-  "/usr/local/texlive/2022/texmf-dist/tex/latex/caption/caption3.sty" 1647548653 71241 d2cd3a1c5acef9cb31f945b93c0bb6e3 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/geometry/geometry.sty" 1578002852 41601 9cf6c5257b1bc7af01a58859749dd37a ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/graphics/keyval.sty" 1622581934 2671 4de6781a30211fe0ea4c672e4a2a8166 ""
   "/usr/local/texlive/2022/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def" 1644269979 29921 d0acc05a38bd4aa3af2017f0b7c137ce ""
@@ -36,9 +33,11 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1656709392 2826438 c719594fe46efdff62f12d7308ffe256 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "VIX-Metaculus Trading Strategies.aux" 1660351674 338 0b6cfe0833a7255724e2052ed6dd4170 "pdflatex"
-  "VIX-Metaculus Trading Strategies.tex" 1660351672 2142 09e05615164cbd7e7b137d9a1b475590 ""
+  "VIX Fear Index Log.aux" 1659379991 967 b70054c29727e981b3dcfa97a9a8697c "pdflatex"
+  "VIX Fear Index Log.tex" 1659379990 3419 1bd68b0443028d536b8c80bfa4797b3c ""
+  "VIX Fear Index Log.toc" 1659379991 566 8d55cc81ce391e801551f78a94e2d09a "pdflatex"
   (generated)
-  "VIX-Metaculus Trading Strategies.aux"
-  "VIX-Metaculus Trading Strategies.log"
-  "VIX-Metaculus Trading Strategies.pdf"
+  "VIX Fear Index Log.aux"
+  "VIX Fear Index Log.log"
+  "VIX Fear Index Log.pdf"
+  "VIX Fear Index Log.toc"
