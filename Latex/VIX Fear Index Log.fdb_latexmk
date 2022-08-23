@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1660384371 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" "VIX Fear Index Log.pdf" "VIX Fear Index Log" 1660384372
-  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" 1660384369 3757 3327642f91fab31ae742c291d044fb18 ""
+["pdflatex"] 1661224196 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" "VIX Fear Index Log.pdf" "VIX Fear Index Log" 1661224197
+  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/VIX Fear Index Log.tex" 1661224195 3799 fc737c84afa86ebdc589252e6f03f889 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
@@ -33,9 +33,9 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1656709392 2826438 c719594fe46efdff62f12d7308ffe256 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "VIX Fear Index Log.aux" 1660384371 1073 e611e4facfa3fc6bcb8ec35b479acc4f "pdflatex"
-  "VIX Fear Index Log.tex" 1660384369 3757 3327642f91fab31ae742c291d044fb18 ""
-  "VIX Fear Index Log.toc" 1660384371 631 c9bf81d8e3c7df55a855eab2f54e1fd9 "pdflatex"
+  "VIX Fear Index Log.aux" 1661224196 1073 e611e4facfa3fc6bcb8ec35b479acc4f "pdflatex"
+  "VIX Fear Index Log.tex" 1661224195 3799 fc737c84afa86ebdc589252e6f03f889 ""
+  "VIX Fear Index Log.toc" 1661224196 631 c9bf81d8e3c7df55a855eab2f54e1fd9 "pdflatex"
   (generated)
   "VIX Fear Index Log.aux"
   "VIX Fear Index Log.log"

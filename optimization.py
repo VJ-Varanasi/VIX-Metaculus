@@ -45,13 +45,13 @@ trading_sec = 'VXX'
 
 
 #Define Start and End Dates
-start = datetime.datetime(2022, 3, 1)
+start = datetime.datetime(2020, 1, 1)
 end = datetime.datetime(2022, 4, 1)
-delta = end - start
+
 
 
 #Add Optimization Param
-cerebro = bt.Cerebro(stdstats=True)
+cerebro = bt.Cerebro(optreturn = False)
 
 #Get File Name
 vxx_partial_name = f'Data/VXX_History*'
@@ -75,57 +75,49 @@ meta_feed = METACULUS_DATA(dataname = metaculus_filename, fromdate = start, toda
 if trading_sec == "SPY":
     spy_feed = YF_DATA(dataname = spy_filename, fromdate = start, todate = end)
     cerebro.adddata(spy_feed)
-    meta_feed.compensate(spy_feed)  # let the system know ops on data1 affect data0
-    meta_feed.plotinfo.plotmaster = spy_feed
+    #meta_feed.compensate(spy_feed)  # let the system know ops on data1 affect data0
+    #meta_feed.plotinfo.plotmaster = spy_feed
     #meta_feed.plotinfo.sameaxis = True
 
 elif trading_sec == "VXX":
     vxx_feed = YF_DATA(dataname = vxx_filename, fromdate = start, todate = end)
     cerebro.adddata(vxx_feed)
-    meta_feed.compensate(vxx_feed)  # let the system know ops on data1 affect data0
-    meta_feed.plotinfo.plotmaster = vxx_feed
+    #meta_feed.compensate(vxx_feed)  # let the system know ops on data1 affect data0
+    #meta_feed.plotinfo.plotmaster = vxx_feed
     #meta_feed.plotinfo.sameaxis = True
 
 
 cerebro.adddata(meta_feed)
 
+
+#OPTIMIZATION SECTION
+
 #Add Strat
-cerebro.addstrategy(strat)
-
-cerebro.addobserver(bt.observers.Broker)
-
-cerebro.addobserver(bt.observers.BuySell)
+cerebro.optstrategy(strat, lead =range(0,30), pct_chng = np.linspace(0,1,11), range = 5)
+#cerebro.optstrategy(strat, pfast =range(5,7), pslow = range (50,53), lag = range (5,7))
 
 #Add Sharpe Ratio
-#Default risk free interest rate of 1%
 cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name = 'sharpe_ratio')
 
 
-#Default position size
-cerebro.addsizer(bt.sizers.SizerFix, stake=1)
 
-#Initial Val
-start_portfolio_value = cerebro.broker.getvalue()
+#Run Optimixation
+#Add Optimization Param
 
-#Run Cerebro
-run = cerebro.run(stdstats=False)
+if __name__ == '__main__':
+    optimized_runs = cerebro.run(stdstats = False)
+    #Pull Results
+    final_results_list = []
+    for run in optimized_runs:
+        for strategy in run:
+            PnL = round(strategy.broker.get_value() - 10000,2)
+            sharpe = strategy.analyzers.sharpe_ratio.get_analysis()
+            final_results_list.append([strategy.params.lead, strategy.params.pct_chng, PnL, sharpe['sharperatio']])
+            #final_results_list.append([strategy.params.pfast, strategy.params.pslow, strategy.params.lag, PnL, sharpe['sharperatio']])
 
+    #Sort Results
+    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
 
-
-#Final Log
-end_portfolio_value = cerebro.broker.getvalue()
-pnl = end_portfolio_value - start_portfolio_value
-sharpe = run[0].analyzers.sharpe_ratio.get_analysis()['sharperatio']
-percent_underwater = round(run[0].underwater/delta.days,2)*100
-print('---------------')
-print(f'Starting Portfolio Value: {start_portfolio_value:2f}')
-print(f'Final Portfolio Value: {end_portfolio_value:2f}')
-print(f'PnL: ${pnl:.2f}')
-print(f'Sharpe Ratio: {sharpe}')
-print(f'Percent Underwater: {percent_underwater}%')
-print('---------------')
-
-#Plotting
-cerebro.plot(volume= False,plotdist = 1)
-
-
+    #Print Results
+    for line in sort_by_sharpe[:5]:
+        print(line)

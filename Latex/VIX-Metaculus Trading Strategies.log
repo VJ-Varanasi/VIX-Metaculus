@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  12 AUG 2022 20:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.24 (TeX Live 2022) (preloaded format=pdflatex 2022.7.1)  23 AUG 2022 00:33
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -153,13 +153,13 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 Here is how much of TeX's memory you used:
  2444 strings out of 478268
  45138 string characters out of 5846348
- 349565 words of memory out of 5000000
+ 350565 words of memory out of 5000000
  20696 multiletter control sequences out of 15000+600000
  473542 words of font info for 42 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 55i,8n,63p,512b,289s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 55i,8n,63p,576b,289s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2022/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/local/texlive/2022/texmf-dist/fonts/type1/public/cm-super/sfrm1000.pfb>
-Output written on "VIX-Metaculus Trading Strategies.pdf" (1 page, 69702 bytes).
+Output written on "VIX-Metaculus Trading Strategies.pdf" (1 page, 70186 bytes).
 PDF statistics:
  39 PDF objects out of 1000 (max. 8388607)
  23 compressed objects within 1 object stream
