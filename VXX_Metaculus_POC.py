@@ -40,12 +40,12 @@ class METACULUS_DATA(bt.feeds.GenericCSVData):
     )
 
 
-strat = trading_strat.Metaculus_lead
-trading_sec = 'VXX'
+strat = trading_strat.Metaculus_lead_SPY
+trading_sec = 'SPY'
 
 
 #Define Start and End Dates
-start = datetime.datetime(2022, 3, 1)
+start = datetime.datetime(2020, 1, 1)
 end = datetime.datetime(2022, 4, 1)
 delta = end - start
 
@@ -67,7 +67,6 @@ smooth_level = 2
 metaculus_partial_name = "Data/{}_Day_Smooth_Metaculus_Users_*".format(smooth_level)
 metaculus_filename = glob.glob(metaculus_partial_name)[0]
 
-
 #Read Data in
 meta_feed = METACULUS_DATA(dataname = metaculus_filename, fromdate = start, todate = end)
 
@@ -77,14 +76,14 @@ if trading_sec == "SPY":
     cerebro.adddata(spy_feed)
     meta_feed.compensate(spy_feed)  # let the system know ops on data1 affect data0
     meta_feed.plotinfo.plotmaster = spy_feed
-    #meta_feed.plotinfo.sameaxis = True
+    
 
 elif trading_sec == "VXX":
     vxx_feed = YF_DATA(dataname = vxx_filename, fromdate = start, todate = end)
     cerebro.adddata(vxx_feed)
     meta_feed.compensate(vxx_feed)  # let the system know ops on data1 affect data0
     meta_feed.plotinfo.plotmaster = vxx_feed
-    #meta_feed.plotinfo.sameaxis = True
+   
 
 
 cerebro.adddata(meta_feed)
@@ -117,6 +116,7 @@ end_portfolio_value = cerebro.broker.getvalue()
 pnl = end_portfolio_value - start_portfolio_value
 sharpe = run[0].analyzers.sharpe_ratio.get_analysis()['sharperatio']
 percent_underwater = round(run[0].underwater/delta.days,2)*100
+print(trading_sec)
 print('---------------')
 print(f'Starting Portfolio Value: {start_portfolio_value:2f}')
 print(f'Final Portfolio Value: {end_portfolio_value:2f}')

@@ -40,8 +40,8 @@ class METACULUS_DATA(bt.feeds.GenericCSVData):
     )
 
 
-strat = trading_strat.Metaculus_lead
-trading_sec = 'VXX'
+strat = trading_strat.Metaculus_lead_SPY
+trading_sec = 'SPY'
 
 
 #Define Start and End Dates
@@ -75,16 +75,12 @@ meta_feed = METACULUS_DATA(dataname = metaculus_filename, fromdate = start, toda
 if trading_sec == "SPY":
     spy_feed = YF_DATA(dataname = spy_filename, fromdate = start, todate = end)
     cerebro.adddata(spy_feed)
-    #meta_feed.compensate(spy_feed)  # let the system know ops on data1 affect data0
-    #meta_feed.plotinfo.plotmaster = spy_feed
-    #meta_feed.plotinfo.sameaxis = True
+    
 
 elif trading_sec == "VXX":
     vxx_feed = YF_DATA(dataname = vxx_filename, fromdate = start, todate = end)
     cerebro.adddata(vxx_feed)
-    #meta_feed.compensate(vxx_feed)  # let the system know ops on data1 affect data0
-    #meta_feed.plotinfo.plotmaster = vxx_feed
-    #meta_feed.plotinfo.sameaxis = True
+   
 
 
 cerebro.adddata(meta_feed)
@@ -93,8 +89,8 @@ cerebro.adddata(meta_feed)
 #OPTIMIZATION SECTION
 
 #Add Strat
-cerebro.optstrategy(strat, lead =range(0,30), pct_chng = np.linspace(0,1,11), range = 5)
-#cerebro.optstrategy(strat, pfast =range(5,7), pslow = range (50,53), lag = range (5,7))
+cerebro.optstrategy(strat, lead =range(0,30), pct_chng = np.linspace(0,0.5,6), range = 5)
+#cerebro.optstrategy(strat, pfast =range(5,20), pslow = range (50,70), lag = range (5,20))
 
 #Add Sharpe Ratio
 cerebro.addanalyzer(bt.analyzers.SharpeRatio, _name = 'sharpe_ratio')
@@ -116,7 +112,7 @@ if __name__ == '__main__':
             #final_results_list.append([strategy.params.pfast, strategy.params.pslow, strategy.params.lag, PnL, sharpe['sharperatio']])
 
     #Sort Results
-    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[2], reverse=True)
+    sort_by_sharpe = sorted(final_results_list, key=lambda x: x[3], reverse=True)
 
     #Print Results
     for line in sort_by_sharpe[:5]:
