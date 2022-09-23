@@ -1,3 +1,4 @@
+from tabnanny import verbose
 import numpy as np
 import pandas as pd
 import glob
@@ -12,11 +13,12 @@ from scipy.spatial.distance import euclidean
 print("")
 return_scale = 1
 #Autocorrelation lags
-lags = 30
+lags = 45
+lags_min = lags - lags
 
 
 
-start_date = "2022-01-01"
+start_date = "2021-01-01"
 
 
 d1_name ="Data/VIX_History*"
@@ -88,8 +90,7 @@ print("---------")
 print("Time Lagged Regression")
 
 
-
-for i in range(1, lags):
+for i in range(lags_min, lags):
     lag_name = "lag {}".format(i)
     df[lag_name] = df["RETURNS_y"].shift(i)
 
@@ -99,9 +100,14 @@ Y = df["RETURNS_x"]
 X = df.iloc[:,1:]
 X2 = sm.add_constant(X)
 
+
+
 est = sm.OLS(Y, X2)
 est2 = est.fit()
+num_stat_sig = sum(est2.pvalues < 0.05)
 print(est2.summary())
+print("{} Statistically Significant Lags".format(num_stat_sig))
+
 
 print("")
 print("LASSO Regression")
@@ -114,25 +120,13 @@ for i in X.columns:
 Y_norm = (Y - Y.mean()) / Y.std() 
 
 
-
-
 alphas = np.geomspace(1e-3,1e-1, 20)
 for i in alphas:
-    # print("alpha = {}".format(i))
-    # print("----")
-    
     lassoreg = Lasso(alpha=i)
     lassoreg.fit(X_norm,Y_norm)
     coefs= lassoreg.coef_
     if sum(coefs) != 0:
         alpha = i
-    # for j in range(len(coefs)):
-    #     if j == 0:
-    #         print("RETURNS_y: {}".format(coefs[j] ))
-    #     else:
-    #         print("Lag {}: {}".format(j, coefs[j] ))
-        
-    # print("")
 
 print("alpha: {}".format(alpha))
 lassoreg = Lasso(alpha=alpha)
@@ -153,19 +147,34 @@ lasso2 = sm.add_constant(lasso_df)
 sparse_reg = sm.OLS(Y, lasso2)
 sparse = sparse_reg.fit()
 print(sparse.summary())
+print("{} Statistically Significant Lags".format(sum(sparse.pvalues < 0.05)))
 
-print("Granger Causality")
+print("Granger Causality F-tests")
 
 #test for stationarity
 
 adf1 = sm.tsa.stattools.adfuller(df["RETURNS_x"], autolag='AIC')[1]
-print(adf1)
-
 adf2 = sm.tsa.stattools.adfuller(df["RETURNS_y"], autolag='AIC')[1]
-print(adf2)
 
 if adf1 < 0.05 and adf2 < 0.05:
-    granger = sm.tsa.stattools.grangercausalitytests(df[["RETURNS_x","RETURNS_y"]], lags)
+    granger = sm.tsa.stattools.grangercausalitytests(df[["RETURNS_x","RETURNS_y"]], lags, verbose= False)
+
+
+else:
+    print("Timeseries are not Stationary")
+
+ftests=[]
+pvals = []
+for i in range(lags):
+    ftests.append(granger[i+1][0]['ssr_ftest'][0])
+    pvals.append(granger[i+1][0]['ssr_ftest'][1])
+
+sort_ftest = sorted(ftests,reverse = True) [0:5]
+
+for i in sort_ftest:
+    ind = ftests.index(i)
+    print("Lag {}: {}".format(ind +1, pvals[ind]))
+
 
 print("---------------------")
 print("Dynamic Time Wrapping")
