@@ -40,6 +40,7 @@ def ts_plot (data_name, start_date, variables, fill):
 #ts_plot(data_name = "VIX", start_date = "2010-01-01", variables = ["OPEN"], fill =1)
 #ts_plot(data_name = "VIX", start_date = "2010-01-01", variables = ["HIGH"], fill =1)
 #ts_plot(data_name = "VIX", start_date = "2010-01-01", variables = ["LOW"], fill =1)
+ts_plot(data_name = "VIX", start_date = "2010-01-01", variables = ["LOW"], fill =1)
 
 #Defining Decomposition Function
 def ts_decomp (data_name, start_date, variables, period):

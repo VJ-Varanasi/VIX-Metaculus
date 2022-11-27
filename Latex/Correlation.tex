@@ -17,7 +17,7 @@ All code can be found in the return\textunderscore corr.py script. An outline of
 
 \section*{Correlation Methods}
 \subsection*{Pearson Correlation}
-Pearson correlation is the a measure of linear correlation between two datasets. 
+Pearson correlation is a measure of linear correlation between two datasets. 
 
 $$
 \rho_{X,Y} = \frac{cov(X,Y)}{\sigma_x \sigma_y}
@@ -28,7 +28,7 @@ Pearson correlation coefficients range between -1 and 1 indicating the strength 
 
 \subsection*{Spearman Correlation}
 
-Spearman (rank) correlation is a measure of rank correlation or how well a monotonic function can approximate the relationship between the two datasets. Spearman correlation is simply calculated as the pearson correlation of the ranks of the datasets. With a coefficient range between -1 and 1 Spearman correlation coefficients provide insight into the general strength and direction of correlation between two datasets (linear or otherwise).
+Spearman (rank) correlation is a measure of rank correlation or how well a monotonic function can approximate the relationship between the two datasets. Spearman correlation is simply calculated as the pearson correlation of the ranked data. With a coefficient range between -1 and 1 Spearman correlation coefficients provide insight into the general strength and direction of correlation between two datasets (linear or otherwise).
 
 \begin{table}[h]
     \centering
@@ -40,11 +40,10 @@ Spearman (rank) correlation is a measure of rank correlation or how well a monot
     Spearman & 0.098 & 0.009\\
     \bottomrule
 \end{tabular}
-\caption{Summary of correlation between returns of metaculus users and returns of financial securities}
 \end{table}
 
 \subsection*{Cross Correlation}
-Cross correlation is a timeseries correlation method in which the timelags of one timeseries are pearson correlated with the second dataset. This method is useful in determining casual relationships between timeseries as it tests for correlation across time. A summary of the 5 strongest time-lag correlations can be found below.
+Cross correlation is a timeseries correlation method in which the timelags of one timeseries are pearson correlated with the other. A summary of the 5 strongest time-lag correlations can be found below.
 
 \begin{table}[h]
     \centering
@@ -59,7 +58,6 @@ Cross correlation is a timeseries correlation method in which the timelags of on
     5 & Lag 313: -0.30 & Lag 313: 0.51\\
     \bottomrule
 \end{tabular}
-\caption{Summary of lagged correlation between returns of metaculus users and returns of financial securities}
 \end{table}
 
 
@@ -83,13 +81,12 @@ A summary of OLS regression with the metaculus data and its timelags as predicto
     Statistical Significant Lags & 3 & 8\\
     \bottomrule
 \end{tabular}
-\caption{Summary of time lagged regression between returns of metaculus users and returns of financial securities}
 \end{table}
 
 
 \subsection*{LASSO Regression}
 
-LASSO regression is a sparse regression method capable of removing predictors from the model. For this reason, it is often used as a feature selection technique. In the context of this project, we used LASSO regression on the 45 timelag predictor set to elucidate the most statistically informative timelags. A summary of our results can be found below. 
+LASSO regression is a sparse regression method capable of removing predictors from the model. For this reason, it is often used for feature selection. In the context of this project, we used LASSO regression on the 45 day lag predictor set to select the most informative ones. A summary of our results can be found below. 
 
 
 \begin{table}[h]
@@ -103,12 +100,11 @@ LASSO regression is a sparse regression method capable of removing predictors fr
     Statistical Significant Lags & 2 & 4\\
     \bottomrule
 \end{tabular}
-\caption{Summary of time lagged LASSO regression between returns of metaculus users and returns of financial securities}
 \end{table}
 
 \section*{Granger Causality}
 
-Granger Causality is a statistical method used to determine whether a given timeseries provides explantory power on another timeseries. The statistical test specifically measures whether adding the timelags of the series in question improves an autoregressive model of the second timeseries. Our statistical test restricted timelags to 45 days. A summary of p-values for the most statistically significant lags can be found below.
+Granger Causality is a statistical method used to determine whether a given timeseries provides explantory power on another timeseries. The statistical test specifically measures whether adding the timelags of the series in question improves an autoregressive model of the second timeseries. Once again, tests were limited to 45 lags for model simplicity. A summary of the most significant time lags and their corresponding p-values can be found below. 
 
 \begin{table}[h]
     \centering
@@ -123,9 +119,9 @@ Granger Causality is a statistical method used to determine whether a given time
     5 & Lag 18: 0.05 & Lag 15: 0.02\\
     \bottomrule
 \end{tabular}
-\caption{Summary of Granger Causality between returns of metaculus users and returns of financial securities}
 \end{table}
 
+\newpage
 \section*{Dynamic Time Wrapping}
 
 Dynamic Time Wrapping is a process commonly used in signal processing to assess the similarity of two timeseries. At a high level, the method works to find minimize the euclidian distance between two timeseries by mapping points from one timeseries to another. A summary of the average distances between the timeseries can be found below.
@@ -140,7 +136,6 @@ Dynamic Time Wrapping is a process commonly used in signal processing to assess 
     Average Distance & 0.67 & 0.74\\
     \bottomrule
 \end{tabular}
-\caption{Summary of Dynamic time Wrapping between returns of metaculus users and returns of financial securities}
 \end{table}
 
 \end{document}

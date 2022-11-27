@@ -1,6 +1,6 @@
 # Fdb version 3
-["pdflatex"] 1663909520 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/Correlation.tex" "Correlation.pdf" "Correlation" 1663909521
-  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/Correlation.tex" 1663909519 5829 d60f47bc9c1a2dd1ba5273e9fe4ffc10 ""
+["pdflatex"] 1663909918 "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/Correlation.tex" "Correlation.pdf" "Correlation" 1663909918
+  "/Users/varunvaranasi/Documents/Yale/Research/Laughlin/VIX-Fear/venv-3.8/Latex/Correlation.tex" 1663909917 5013 3393e8556b5b387a84a48a441337acb9 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2022/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
@@ -46,8 +46,8 @@
   "/usr/local/texlive/2022/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1647878959 4410336 7d30a02e9fa9a16d7d1f8d037ba69641 ""
   "/usr/local/texlive/2022/texmf-var/web2c/pdftex/pdflatex.fmt" 1656709392 2826438 c719594fe46efdff62f12d7308ffe256 ""
   "/usr/local/texlive/2022/texmf.cnf" 1647878952 577 209b46be99c9075fd74d4c0369380e8c ""
-  "Correlation.aux" 1663909521 1295 65288e369861abb865323eb84e4db083 "pdflatex"
-  "Correlation.tex" 1663909519 5829 d60f47bc9c1a2dd1ba5273e9fe4ffc10 ""
+  "Correlation.aux" 1663909918 32 ab05033ccbb38b00a31b200ccedf8001 "pdflatex"
+  "Correlation.tex" 1663909917 5013 3393e8556b5b387a84a48a441337acb9 ""
   (generated)
   "Correlation.aux"
   "Correlation.log"
